@@ -4,6 +4,7 @@ import VehicleSection from "./Claim form subtypes/VehicleSection";
 import LabelledInput from "./LabelledInputs/LabelledInput"
 
 const ClaimForm = (props) => {
+    console.log(props.formType)
     return (
         <div>
             <section>
@@ -23,8 +24,8 @@ const ClaimForm = (props) => {
             {
                 {
                     'pet':<PetSection />,
-                    'vehicle':<VehicleSection/>,
-                    'property':<PropertySection />
+                    'property':<PropertySection />,
+                    'vehicle':<VehicleSection/>
                 }[props.formType]
             }
         </div>

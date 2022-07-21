@@ -5,7 +5,6 @@ import MoneyInput from "./Subtypes/MoneyInput";
 import ShortTextInput from "./Subtypes/ShortTextInput";
 
 const LabelledInput = (props) => {
-    console.log(props.name)
     return (
         <Fragment>
             <label htmlFor={props.name}>{props.label}: </label>
