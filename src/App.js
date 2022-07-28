@@ -6,13 +6,15 @@ import HeaderNavBar from './Components/Menus/HeaderNavBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NotFound from './Components/NotFound';
 import Home from './Components/Home';
+import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
+import FootBar from './Components/Menus/FootBar';
 
 function App() {
   return (
   <Router>
     <div className="App">
       <HeaderNavBar />
-      
       <div className="content">
         <Routes>        
         <Route exact path="home" element={<Home/>} />
@@ -22,8 +24,9 @@ function App() {
           <Route exact path="review-claim/" element={<ClaimForm formType="vehicle"/>} />
           <Route exact path="*" element={<NotFound/>} />
         </Routes>
-      </div>
-    </div>
+      </div>  
+      <FootBar/>
+    </div>    
   </Router>
   )
 }
