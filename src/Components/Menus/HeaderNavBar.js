@@ -8,7 +8,7 @@ const HeaderNavBar = () => {
     return ( 
         <Navbar bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand as={Link} to="">AllState Claims</Navbar.Brand>
+                <Navbar.Brand as={Link} to="home">AllState Claims</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
