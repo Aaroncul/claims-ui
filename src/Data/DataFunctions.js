@@ -19,7 +19,7 @@ export const getAllCustomers = () => {
 export const addNewClaim = (username, password, data) =>  {
     return axios({ url : apiUrl+"claim", 
     method : "POST", 
-    headers : {...basicAuthHeader(username, password), 'Accept': 'application/json', 'Content-Type' : 'application/json' } , 
+    headers : {...basicAuthHeader("Aaron", "password"), 'Accept': 'application/json', 'Content-Type' : 'application/json' } , 
     data : data } );
 }
 

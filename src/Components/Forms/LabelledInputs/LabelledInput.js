@@ -10,10 +10,10 @@ const LabelledInput = (props) => {
             <label htmlFor={props.name}>{props.label}: </label>
             {
                 {
-                    'date': <DateInput name={props.name} id={props.name} />,
-                    'money': <MoneyInput name={props.name} id={props.name} />,
-                    'shortText': <ShortTextInput name={props.name} id={props.name} />,
-                    'longText': <LongTextInput name={props.name} id={props.name} />
+                    'date': <DateInput           name={props.name} id={props.name} value={props.name}/>,
+                    'money': <MoneyInput         name={props.name} id={props.name} value={props.name}/>,
+                    'shortText': <ShortTextInput name={props.name} id={props.name} value={props.name}/>,
+                    'longText': <LongTextInput   name={props.name} id={props.name} value={props.name}/>
 
                 }[props.inputType]
             }
@@ -21,5 +21,8 @@ const LabelledInput = (props) => {
         </Fragment>
     )
 }
+
+
+
 
 export default LabelledInput;

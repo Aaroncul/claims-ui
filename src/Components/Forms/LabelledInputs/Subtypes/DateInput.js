@@ -1,6 +1,6 @@
 const DateInput = () =>
 {
-    return <input type="date" />
+    return <input type="date"/>
 }
 
 export default DateInput;
