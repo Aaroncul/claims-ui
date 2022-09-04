@@ -7,6 +7,15 @@ const basicAuthHeader = (username, password) => {
     return {'Authorization' : 'Basic ' + btoa(`${username}:${password}`)}
 }
 
+export const getHealth = () => {
+    const customers = 
+    axios({
+        url : apiUrl+"health", 
+        method: "GET", 
+        headers : {'Accept': 'application/json'} });
+    return customers;
+}
+
 export const getAllCustomers = () => {
     const customers = 
     axios({
