@@ -9,9 +9,9 @@ const ClaimForm = (props) => {
         lastName: "",
         policyNumber: "",
         claimDate: new Date().toISOString().slice(0, 10),
-        claimAmount: "0",
+        claimAmount: 0,
         claimReason: "",
-        incidentDescription: "USD",
+        incidentDescription: "",
         petAnimal: "",
         petbreed: "",
         propertyAddress: "",
@@ -50,7 +50,7 @@ const ClaimForm = (props) => {
 
     }
 
-    const handleChange = (event) => {
+    const handleChange = (event) => {        
         const dataToChange = { field: event.target.id, value: event.target.value };
         dispatch(dataToChange);
     }
@@ -77,7 +77,7 @@ const ClaimForm = (props) => {
     }
 
     return (
-        <form>
+        <form onSubmit={submit}>
             <section>
                 <h3>Personal Details</h3>
                 <label htmlFor="firstName">First name: </label>

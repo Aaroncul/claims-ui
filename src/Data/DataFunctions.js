@@ -25,10 +25,10 @@ export const getAllCustomers = () => {
     return customers;
 }
 
-export const addNewClaim = (username, password, data) =>  {
+export const addNewClaim = (data) =>  {
     return axios({ url : apiUrl+"claim", 
     method : "POST", 
-    headers : {...basicAuthHeader("Aaron", "password"), 'Accept': 'application/json', 'Content-Type' : 'application/json' } , 
+    headers : {'Accept': 'application/json', 'Content-Type' : 'application/json' } , 
     data : data } );
 }
 
