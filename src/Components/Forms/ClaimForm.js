@@ -1,8 +1,9 @@
-import { addNewClaim, getHealth } from '../../Data/DataFunctions'
+import { addNewClaim, getHealth } from '../../data/DataFunctions'
 import { useReducer, useState } from "react";
+import { useSelector } from "react-redux";
+
 
 const ClaimForm = (props) => {
-
     const initialNewClaimState = {
         firstName: "",
         middleName: "",
@@ -30,12 +31,14 @@ const ClaimForm = (props) => {
     const [newClaim, dispatch] = useReducer(formReducer, initialNewClaimState);
     const [message, setMessage] = useState("")
     const [saving, setSaving] = useState(false);
-
+    const user = useSelector(state => state.user);
     const submit = (event) => {
         event.preventDefault();
         console.log("saving");
         console.log(newClaim);
-        const response = addNewClaim(newClaim);
+        
+        
+        const response = addNewClaim(user.name, user.password, newClaim);
         response.then(
             result => {
                 if (result.status === 200) {
