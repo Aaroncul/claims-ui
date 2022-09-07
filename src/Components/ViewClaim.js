@@ -5,10 +5,22 @@ import { getClaim } from "../data/DataFunctions";
 
 const ViewClaim = () => {
 
-    const emptyClaim = { orderId: "", date : new Date().toISOString().slice(0,10) , country: "",
-        amount : "", currency: "", taxCode : "", taxRate : "", type : ""}
+    const emptyClaim = { firstName: "",
+        middleName: "",
+        lastName: "",
+        policyNumber: "",
+        claimDate: new Date().toISOString().slice(0, 10),
+        claimAmount: 0,
+        claimReason: "",
+        incidentDescription: "",
+        petAnimal: "",
+        petbreed: "",
+        propertyAddress: "",
+        vehicleMake: "",
+        vehicleModel: "",
+        vehicleYear: ""}
 
-    const [Claim, setClaim] = useState(emptyClaim);
+    const [claim, setClaim] = useState(emptyClaim);
     const user = useSelector(state => state.user);
 
     const navigate = useNavigate();
@@ -30,20 +42,22 @@ const ViewClaim = () => {
     const dispatch = useDispatch();
 
     const edit = () => {
-        dispatch({type: "set-Claim-to-edit", value : Claim});
+        dispatch({type: "set-claim-to-edit", value : claim});
         navigate("/edit/" + params.id);
     }
     
     return (
         <Fragment>
-            <h2>View Claim {Claim.id} </h2>
+            <h2>View Claim {claim.id} </h2>
             <table className="ClaimsTable" >
                 <tbody>
-                    <tr><th>Order Id</th><td>{Claim.id}</td></tr>
-                    <tr><th>Date</th><td>{Claim.lastName}</td></tr>
+                    <tr><th>Id</th><td>{claim.id}</td></tr>
+                    <tr><th>Date</th><td>{claim.claimDate}</td></tr>
+                    <tr><th>Name</th><td>{claim.lastName}</td></tr>
+                    <tr><th>Amount</th><td>{claim.claimAmount}</td></tr>
                 </tbody>
             </table>
-            {user.role === "MANAGER" && <button onClick={edit}>edit</button> }
+            {user.role === "STAFF" && <button onClick={edit}>edit</button> }
         </Fragment>
     );
 }

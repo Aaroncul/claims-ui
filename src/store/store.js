@@ -1,7 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-const initialState = { countries : [] , lastFetch : null ,
-     user:{username : "", password: "", role : "", name : ""}};
+const initialState = {lastFetch : null ,
+     user:{username : "", password: "", role : "", name : ""},
+     claim : [],
+     claimToEdit : {}};
 
 const loginReducer = (state = initialState, action) => {
     if (action.type === "clear-down") {
@@ -13,11 +15,11 @@ const loginReducer = (state = initialState, action) => {
     else if (action.type === "logout") {
         return {...state, user : {username : "", password: "", role : "", name : ""}}
     }
-    else if (action.type === "save-claims") {
-        return {...state, transactions : action.value, lastFetch : new Date().getTime()}
+    else if (action.type === "save-claim") {
+        return {...state, claim : action.value, lastFetch : new Date().getTime()}
     }
-    else if (action.type === "set-claims-to-edit") {
-        return {...state, transactionToEdit : action.value}
+    else if (action.type === "set-claim-to-edit") {
+        return {...state, claimToEdit : action.value}
     }
     else {
         console.log("unknown redux action " + action.type);
