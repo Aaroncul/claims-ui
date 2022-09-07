@@ -48,7 +48,7 @@ const ClaimForm = (props) => {
     const {firstName, middleName, lastName, policyNumber,
         claimDate, claimAmount, claimReason, incidentDescription,
         petAnimal, petbreed, propertyAddress, vehicleMake,
-        vehicleModel, vehicleYear} = newClaim;
+        vehicleModel, vehicleYear,claimStatus} = newClaim;
 
         const user = useSelector(state => state.user);
         const navigate = useNavigate();
@@ -101,12 +101,11 @@ const ClaimForm = (props) => {
             if( vehicleYear !== claimToEdit.vehicleYear ){
                 data = {...data, vehicleYear:vehicleYear};
             };
-            console.log(params.id);
-            console.log(data);
+            if( claimStatus !== claimToEdit.claimStatus ){
+                data = {...data, claimStatus:claimStatus};
+            };
             response = updateClaim(user.username, user.password, params.id, data);
         } else {
-            console.log("adding new claim");
-            console.log(newClaim);
             response = addNewClaim(user.name, user.password, newClaim);            
         }
 
