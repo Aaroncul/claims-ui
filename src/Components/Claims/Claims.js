@@ -1,8 +1,7 @@
 import { Fragment, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
-import { getClaims } from '../../data/DataFunctions';
+import { getAllClaims, getMyClaims } from '../../data/DataFunctions';
 import ClaimRow from './ClaimRow';
 
 
@@ -14,37 +13,36 @@ const Claims = (props) => {
 
     const user = useSelector(state => state.user);
 
-    const getClaimsFromServer = () => {
-        const claimsPromise = getClaims(user.username, user.password);
+    useEffect(() => {
+
+        const claimsPromise = user.role === "STAFF" ? getAllClaims(user.username, user.password)
+            : getMyClaims(user.username, user.password);
+
         claimsPromise.then(
             (response) => {
                 if (response.status === 200) {
                     setClaims(response.data);
-                    dispatch({ type: "save-claims", value: response.data });
+                    dispatch({ type: "save-claim", value: response.data });
                 }
                 else {
                     console.log("Something went wrong", response.status);
                 }
             }
 
-        )
-            .catch(
-                (error) => {
-                    console.log("Server error", error);
-                }
-            );
-    };
+        ).catch(
+            (error) => {
+                console.log("Server error", error);
+            }
+        );
+    },);
 
-    useEffect(() => {
-        getClaimsFromServer();
-    }, []);
-    
     const users = [...new Set(claims.map(item => item.user.username))];
 
     const [selecteduser, setSelecteduser] = useState("none");
 
     const [searchParams, setSearchParams] = useSearchParams();
     const targetuser = searchParams.get("id");
+
     if (targetuser != null && targetuser !== selecteduser) {
         setSelecteduser(targetuser);
     }
@@ -53,10 +51,10 @@ const Claims = (props) => {
         (user => <option key={user} value={user}>{user}</option>);
 
     const displayClaims = claims.map(userClaims =>
-            (userClaims.user.username === selecteduser) &&
-            <ClaimRow key={userClaims.id} id={userClaims.id} date={userClaims.claimDate}
-                name={userClaims.user.lastName} amount={userClaims.claimAmount} />
-        );
+        (userClaims.user.username === selecteduser) &&
+        <ClaimRow key={userClaims.id} id={userClaims.id} date={userClaims.claimDate}
+            name={userClaims.user.lastName} amount={userClaims.claimAmount} />
+    );
 
     const changeuser = (event) => {
         const selecteduserIndex = event.target.options.selectedIndex;

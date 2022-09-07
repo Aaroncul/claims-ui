@@ -12,7 +12,7 @@ import ProtectedRoute from './userManagement/ProtectedRoute';
 
 import { Provider } from 'react-redux';
 import FindAClaim from './Components/FindAClaim';
-import ViewClaim from './Components/ViewAClaim';
+import ViewClaim from './Components/ViewClaim';
 
 function App() {
   return (
@@ -31,15 +31,16 @@ function App() {
             <ProtectedRoute component={<FindAClaim />} roles={["CUSTOMER", "STAFF"]} />
           } />
             <Route path="/find/:id" element = {<ProtectedRoute component={<FindAClaim />} roles={["CUSTOMER", "STAFF"]} />} />
+            <Route path="/edit/:id" element = {<ProtectedRoute component={<ClaimForm/>} roles={["STAFF"]} />} />
             <Route path="/view/:id" element = {<ProtectedRoute component={<ViewClaim />} roles={["CUSTOMER", "STAFF"]} />} />
             <Route path="/find" element = {<ProtectedRoute component={<FindAClaim />} roles={["CUSTOMER", "STAFF"]} />} />
 
               <Route path="new-claim/pet" element=
-                {<ProtectedRoute component={<ClaimForm formType="pet" />} roles={["CUSTOMER"]} />} />
+                {<ProtectedRoute component={<ClaimForm formType="pet" />} roles={["CUSTOMER","STAFF"]} />} />
               <Route path="new-claim/property" element=
-                {<ProtectedRoute component={<ClaimForm formType="property" />} roles={["CUSTOMER"]} />} />
+                {<ProtectedRoute component={<ClaimForm formType="property" />} roles={["CUSTOMER", "STAFF"]} />} />
               <Route path="new-claim/vehicle" element=
-                {<ProtectedRoute component={<ClaimForm formType="vehicle" />} roles={["CUSTOMER"]} />} />
+                {<ProtectedRoute component={<ClaimForm formType="vehicle" />} roles={["CUSTOMER", "STAFF"]} />} />
               <Route exact path="*" element={<NotFound />} />
             </Routes>
           </div>

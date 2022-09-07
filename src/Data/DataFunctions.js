@@ -35,23 +35,11 @@ export const addNewClaim = (username, password, data) => {
     });
 }
 
-export const getAllclaimAxiosVersion = (username, password) => {
-
-    const claimPromise = axios({
-        url: "http://localhost:8080/api/claim/",
-        method: "GET", headers: { ...basicAuthHeader(username, password), 'Accept': 'application/json' }
-    });
-
-    return claimPromise;
-}
-
-export const updateClaim = (username, password, id, data) => {
-    return axios({
-        url: "http://localhost:8080/api/claim/" + id,
-        method: "PUT",
-        headers: { ...basicAuthHeader(username, password), 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        data: data
-    });
+export const updateClaim = (username, password, id, data) =>  {
+    return axios({ url : "http://localhost:8080/api/claim/" + id, 
+    method : "PUT", 
+    headers : {...basicAuthHeader(username, password), 'Accept': 'application/json', 'Content-Type' : 'application/json' } , 
+    data : data } );
 }
 
 export const getClaim = (username, password, id) => {
@@ -63,7 +51,7 @@ export const getClaim = (username, password, id) => {
         });
 }
 
-export const getClaims = (username, password) => {
+export const getAllClaims = (username, password) => {
     return axios(
         {
             url: `http://localhost:8080/api/claim`,
@@ -71,12 +59,31 @@ export const getClaims = (username, password) => {
             headers: { ...basicAuthHeader(username, password), 'Accept': 'application/json' }
         });
 }
-
+export const getMyClaims = (username, password) => {
+    return axios(
+        {
+            url: `http://localhost:8080/api/claim/myClaims`,
+            method: "GET",
+            headers: { ...basicAuthHeader(username, password), 'Accept': 'application/json' }
+        });
+}
 export const login = (username, password) => {
     return axios(
-        {url : "http://localhost:8080/api/login",
+        {url : apiUrl + "login",
         method: "POST",
         headers : { ...basicAuthHeader(username,password) , 'Accept': 'application/json', 'Content-Type' : 'application/json' },
         data : {"username" : username}
     }) ;
+}
+
+export const getUserDetails = (username, password) => {
+    return axios(
+        {
+            url: apiUrl + "user",
+            method: "GET",
+            headers: { 
+                ...basicAuthHeader(username, password), 
+                'Accept': 'application/json', 
+                'Content-Type' : 'application/json' }
+        });
 }
