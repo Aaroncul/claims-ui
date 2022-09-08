@@ -5,7 +5,7 @@ import { getAllClaims, getMyClaims } from '../../data/DataFunctions';
 import ClaimRow from './ClaimRow';
 
 
-const Claims = (props) => {
+const Claims = () => {
 
     const [claims, setClaims] = useState([]);
 
@@ -13,9 +13,23 @@ const Claims = (props) => {
 
     const user = useSelector(state => state.user);
 
-    useEffect(() => {
+    const users = [...new Set(claims.map(item => item.user.username))];
 
-        const claimsPromise = user.role === "STAFF" ? getAllClaims(user.username, user.password)
+    const [selecteduser, setSelecteduser] = useState("none");
+
+    const [searchParams, setSearchParams] = useSearchParams();
+    const targetuser = searchParams.get("id");
+
+    if (targetuser != null && targetuser !== selecteduser) {
+        setSelecteduser(targetuser);
+    }
+
+    const userOptions = users.map
+        (user => <option key={user} value={user}>{user}</option>);
+
+    useEffect(() => {
+        const claimsPromise = user.role === "STAFF" ?
+            getAllClaims(user.username, user.password)
             : getMyClaims(user.username, user.password);
 
         claimsPromise.then(
@@ -34,26 +48,22 @@ const Claims = (props) => {
                 console.log("Server error", error);
             }
         );
-    },);
 
-    const users = [...new Set(claims.map(item => item.user.username))];
-
-    const [selecteduser, setSelecteduser] = useState("none");
-
-    const [searchParams, setSearchParams] = useSearchParams();
-    const targetuser = searchParams.get("id");
-
-    if (targetuser != null && targetuser !== selecteduser) {
-        setSelecteduser(targetuser);
-    }
-
-    const userOptions = users.map
-        (user => <option key={user} value={user}>{user}</option>);
+        if (userOptions.length > 0 && user.role === "CUSTOMER") {
+            console.log("selected user")
+            setSelecteduser(users[0]);
+            setSearchParams({ user: users[0] });
+        }
+    }, []);
 
     const displayClaims = claims.map(userClaims =>
         (userClaims.user.username === selecteduser) &&
-        <ClaimRow key={userClaims.id} id={userClaims.id} date={userClaims.claimDate}
-            name={userClaims.user.lastName} amount={userClaims.claimAmount} />
+        <ClaimRow key={userClaims.id}
+            id={userClaims.id}
+            date={userClaims.claimDate}
+            name={userClaims.user.lastName}
+            amount={userClaims.claimAmount}
+            status={userClaims.claimStatus} />
     );
 
     const changeuser = (event) => {
@@ -63,24 +73,22 @@ const Claims = (props) => {
     }
 
     return <Fragment>
-        <p >{userOptions.length > 0 &&
+        <p>Filter by user: 
             <select onChange={changeuser} defaultValue="none" >
                 <option disabled value="none"> Please select a user </option>
                 {userOptions}
             </select>
-        }
         </p>
-
-        <table id="claimsTable" style={{ background: "#ccc" }} className="claimsTable">
-            <thead>
-                <tr><th>Id</th><th>Date</th><th>Name</th><th>Amount</th></tr>
-            </thead>
-            <tbody>
-                {displayClaims}
-            </tbody>
-        </table>
-
-        {claims.length === 0 && <p>Please wait... loading data</p>}
+        <center>
+            <table id="claimsTable" style={{ background: "#ccc" }} className="claimsTable">
+                <thead>
+                    <tr><th>Id</th><th>Date</th><th>Name</th><th>Amount</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                    {displayClaims}
+                </tbody>
+            </table>
+        </center>
     </Fragment>
 }
 

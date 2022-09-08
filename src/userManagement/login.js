@@ -32,11 +32,13 @@ const Login = () => {
                             role : result.data.role, 
                             name : result.data.username} 
                     });
+                    
                     if(searchParams.get("target")==null)
                     {
                         navigate("/home");
+                    }else{
+                        navigate(searchParams.get("target"));   
                     }
-                    navigate(searchParams.get("target"));   
                 }
             })
             .catch (error => {

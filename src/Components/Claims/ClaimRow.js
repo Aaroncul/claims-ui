@@ -10,8 +10,14 @@ const ClaimRow = (props) => {
     }
 
     
-    return <tr id={props.id} ><td>{props.id}</td><td>{props.date}</td><td>{props.name}</td><td>{props.amount}</td>
-    <td><button onClick={handleClick}>view</button> </td></tr>
+    return <tr id={props.id} >
+                <td>{props.id}</td>
+                <td>{props.date}</td>
+                <td>{props.name}</td>
+                <td>{props.amount}</td>
+                <td>{props.status}</td>
+                <td><button onClick={handleClick}>view</button></td>
+            </tr>
 
 }
 

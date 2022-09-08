@@ -12,10 +12,8 @@ const FindAClaim = () => {
         setSearchTerm(params.id);
     }
 
-
-
     return ( <Fragment>
-                <Search setSearchTerm={setSearchTerm} />
+                {/* <Search setSearchTerm={setSearchTerm} /> */}
                 <Claims searchTerm={searchTerm} />
             </Fragment>);
 }

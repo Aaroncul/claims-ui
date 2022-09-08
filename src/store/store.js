@@ -3,7 +3,8 @@ import { configureStore } from '@reduxjs/toolkit'
 const initialState = {lastFetch : null ,
      user:{username : "", password: "", role : "", name : ""},
      claim : [],
-     claimToEdit : {}};
+     claimToEdit : {},
+     claimStatusOptions : []};
 
 const loginReducer = (state = initialState, action) => {
     if (action.type === "clear-down") {
@@ -25,8 +26,8 @@ const loginReducer = (state = initialState, action) => {
         console.log("unknown redux action " + action.type);
         return state;
     }
-
 }
+
 const myStore = configureStore({reducer : loginReducer});
 
 export default myStore;

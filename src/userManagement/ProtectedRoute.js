@@ -11,7 +11,7 @@ const ProtectedRoute = (props) => {
     if (allowedRoles.includes(role)) {
         result = props.component;
     }  else if (role === "") {
-        result = <Navigate to={"/login?target=" + location.pathname} />
+        result = <Navigate to={"/login?target=" + location.pathName} />
     }
     else {
         result = <p>Sorry you are not permitted to access this function</p>

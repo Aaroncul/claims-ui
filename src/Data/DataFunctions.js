@@ -67,6 +67,14 @@ export const getMyClaims = (username, password) => {
             headers: { ...basicAuthHeader(username, password), 'Accept': 'application/json' }
         });
 }
+export const getClaimStatusOptions = () => {
+    return axios(
+        {
+            url: `http://localhost:8080/api/claimstatus`,
+            method: "GET",
+            headers: {'Accept': 'application/json' }
+        });
+}
 export const login = (username, password) => {
     return axios(
         {url : apiUrl + "login",
