@@ -116,8 +116,7 @@ const ClaimForm = (props) => {
         response.then(
             result => {
                 if (result.status === 200) {
-                    //navigate("/find/" + result.data.id);
-                    
+                    navigate("/find/" + result.data.id);                    
                 }
                 else {
                     console.log("something went wrong - error code was " + result.status);
@@ -125,6 +124,8 @@ const ClaimForm = (props) => {
             }
         ).catch(error => console.log("something went wrong ", error));
     };
+
+    const hasStaffNotes = useSelector(state => state.claimToEdit.staffNotes);
 
     return (
         <form onSubmit={submit}>
@@ -210,7 +211,8 @@ const ClaimForm = (props) => {
                     <h4>Staff Only</h4>
                     <label htmlFor="staffNotes">Staff Notes: </label>
                     <textarea required rows="4" cols="50" maxLength="20000" onChange={handleChange}
-                    name="staffNotes" id="staffNotes" value={staffNotes}></textarea>
+                        name="staffNotes" id="staffNotes" value={staffNotes} disabled={hasStaffNotes}
+                        ></textarea>
                     <p>Set status:
                         <select name="claimStatus" id="claimStatus" 
                             onChange={handleChange}
