@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch} from "react-redux";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { login } from "../data/DataFunctions";
+import { login } from "../../data/DataFunctions";
 
 const Login = () => {
 
@@ -27,8 +27,8 @@ const Login = () => {
             .then (result => {
                 if (result.status === 200) {
                     dispatch(
-                        {type : "login",
-                        value : {username : username, password: password, 
+                        {   type : "login",
+                            value : {username : username, password: password, 
                             role : result.data.role, 
                             name : result.data.username} 
                     });
@@ -48,10 +48,10 @@ const Login = () => {
 
     return(
         <div>
+            <br/>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="username">Username</label>
                 <input onChange={updateUsername} value={username} id="username"></input>
-
                 <label htmlFor="password">Password</label>
                 <input onChange={updatePassword} value={password} id="password"></input>
 

@@ -1,5 +1,5 @@
-import { addNewClaim, updateClaim } from '../../data/DataFunctions'
-import { Fragment, useEffect, useReducer, useState } from "react";
+import { addNewClaim, updateClaim } from '../../../data/DataFunctions'
+import { Fragment, useReducer } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 
@@ -108,7 +108,6 @@ const ClaimForm = (props) => {
                 data = { ...data, staffNotes: staffNotes };
             };
             response = updateClaim(user.username, user.password, params.id, data);
-            console.log(data);
         } else {
             response = addNewClaim(user.name, user.password, newClaim);
         }

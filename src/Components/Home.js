@@ -1,10 +1,12 @@
 function Home() {
-    return ( 
-        <div>
-            <p>This is the home screen.</p>
-            <p>Start a new claim using the nav bar above.</p>            
-        </div>
-     );
+    return (
+        <center>
+            <div>
+                <h3>This is the home screen.</h3>
+                <p>It is very pretty.</p>
+            </div>
+        </center>
+    );
 }
 
 export default Home;

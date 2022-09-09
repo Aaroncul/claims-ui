@@ -4,10 +4,9 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { useSelector } from "react-redux";
-import Login from "../../userManagement/login";
 import { Fragment } from "react";
 
-const logout = (event) => {
+const logout = () => {
     logout();
 }
 

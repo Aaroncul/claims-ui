@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import { getClaim } from "../data/DataFunctions";
+import { getClaim } from "../../data/DataFunctions";
 
 const ViewClaim = () => {
 
@@ -27,7 +27,7 @@ const ViewClaim = () => {
 
     const navigate = useNavigate();
 
-    const params = useParams();
+    const params = useParams(); 
     useEffect(() => {
         getClaim(user.username, user.password, params.id)
             .then(response => {

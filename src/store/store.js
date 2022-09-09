@@ -23,7 +23,6 @@ const loginReducer = (state = initialState, action) => {
         return {...state, claimToEdit : action.value}
     }
     else {
-        console.log("unknown redux action " + action.type);
         return state;
     }
 }

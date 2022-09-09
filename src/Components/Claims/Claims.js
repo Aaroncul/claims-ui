@@ -50,7 +50,6 @@ const Claims = () => {
         );
 
         if (userOptions.length > 0 && user.role === "CUSTOMER") {
-            console.log("selected user")
             setSelecteduser(users[0]);
             setSearchParams({ user: users[0] });
         }
@@ -73,12 +72,14 @@ const Claims = () => {
     }
 
     return <Fragment>
+        <br/>
         <p>Filter by user: 
             <select onChange={changeuser} defaultValue="none" >
                 <option disabled value="none"> Please select a user </option>
                 {userOptions}
             </select>
         </p>
+        { displayClaims.length > 0 &&
         <center>
             <table id="claimsTable" style={{ background: "#ccc" }} className="claimsTable">
                 <thead>
@@ -89,6 +90,11 @@ const Claims = () => {
                 </tbody>
             </table>
         </center>
+        }
+        {
+            displayClaims.length === 0 &&
+            <p>No claims to display.</p>
+        }
     </Fragment>
 }
 
