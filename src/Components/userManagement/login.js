@@ -9,6 +9,7 @@ const Login = () => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [message, setMessage] = useState("")
 
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
@@ -42,7 +43,7 @@ const Login = () => {
                 }
             })
             .catch (error => {
-                console.log("error ", error);
+                setMessage("Login failed!");
             })
     }
 
@@ -56,6 +57,8 @@ const Login = () => {
                 <input onChange={updatePassword} value={password} id="password"></input>
 
                 <button type="submit">log in</button>
+                <br/>
+                <p>{message}</p>
             </form>
         </div>
     )
