@@ -6,7 +6,7 @@ const initialState = {lastFetch : null ,
      claimToEdit : {},
      claimStatusOptions : []};
 
-const loginReducer = (state = initialState, action) => {
+const claimsReducer = (state = initialState, action) => {
     if (action.type === "clear-down") {
         return initialState;
     }
@@ -27,6 +27,6 @@ const loginReducer = (state = initialState, action) => {
     }
 }
 
-const myStore = configureStore({reducer : loginReducer});
+const myStore = configureStore({reducer : claimsReducer});
 
 export default myStore;

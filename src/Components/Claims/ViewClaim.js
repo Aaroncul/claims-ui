@@ -13,6 +13,7 @@ const ViewClaim = () => {
         claimDate: new Date().toISOString().slice(0, 10),
         claimAmount: 0,
         claimReason: "",
+        incidentDate: new Date().toISOString().slice(0, 10),
         incidentDescription: "",
         petAnimal: "",
         petbreed: "",
@@ -28,6 +29,7 @@ const ViewClaim = () => {
     const navigate = useNavigate();
 
     const params = useParams(); 
+    const [exists, setExists] = useState(true);
     useEffect(() => {
         getClaim(user.username, user.password, params.id)
             .then(response => {
@@ -38,8 +40,13 @@ const ViewClaim = () => {
                     console.log("Something went wrong ", response.status);
                 }
             })
-            .catch(error => console.log("error occurred", error));
-    }, []);
+            .catch(error => {
+                setExists(false);
+                console.log("error occurred", error);
+            })
+            console.log(exists);
+        }
+    , []);
 
     const dispatch = useDispatch();
 
@@ -48,8 +55,12 @@ const ViewClaim = () => {
         navigate("/edit/" + params.id);
     }
 
-    return (
-        <Fragment>
+    return (<Fragment>
+            {!exists &&
+            <p>No claim exists with ID {params.id}.</p>
+            }
+             {exists &&
+                <Fragment>
             <h2>View Claim {claim.id} </h2>
             <table className="claimsTable">
                 <tbody>
@@ -60,6 +71,7 @@ const ViewClaim = () => {
                     <tr><th>claimDate</th><td>{claim.claimDate}</td></tr>
                     <tr><th>claimReason</th><td>{claim.claimReason}</td></tr>
                     <tr><th>Amount</th><td>{claim.claimAmount}</td></tr>
+                    <tr><th>Incident Date</th><td>{claim.incidentDate}</td></tr>
                     <tr><th>incidentDescription</th><td>{claim.incidentDescription}</td></tr>
                     {claim.petAnimal !== "" &&
                         <Fragment>
@@ -84,8 +96,11 @@ const ViewClaim = () => {
                 </tbody>
             </table>
             {user.role === "STAFF" && <button onClick={edit}>Edit</button>}
-            <button onClick={() => navigate(-1)}>Go back</button>
-        </Fragment>
+                
+            
+        </Fragment>}
+        <button onClick={() => navigate(-1)}>Go back</button>
+        </Fragment>        
     );
 }
 

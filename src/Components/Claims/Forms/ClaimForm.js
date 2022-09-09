@@ -14,6 +14,7 @@ const ClaimForm = (props) => {
         claimDate: new Date().toISOString().slice(0, 10),
         claimAmount: 0,
         claimReason: "",
+        incidentDate: new Date().toISOString().slice(0, 10),
         incidentDescription: "",
         petAnimal: "",
         petbreed: "",
@@ -46,7 +47,7 @@ const ClaimForm = (props) => {
     }
 
     const { firstName, middleName, lastName, policyNumber,
-        claimDate, claimAmount, claimReason, incidentDescription,
+        claimDate, claimAmount, claimReason, incidentDate, incidentDescription,
         petAnimal, petbreed, propertyAddress, vehicleMake,
         vehicleModel, vehicleYear, claimStatus,staffNotes } = newClaim;
 
@@ -79,6 +80,9 @@ const ClaimForm = (props) => {
             };
             if (claimReason !== claimToEdit.claimReason) {
                 data = { ...data, claimReason: claimReason };
+            };
+            if (incidentDate !== claimToEdit.incidentDate) {
+                data = { ...data, incidentDate: incidentDate };
             };
             if (incidentDescription !== claimToEdit.incidentDescription) {
                 data = { ...data, incidentDescription: incidentDescription };
@@ -161,8 +165,12 @@ const ClaimForm = (props) => {
                 <input required type="text" maxLength="30" onChange={handleChange}
                     name="claimReason" id="claimReason" value={claimReason} />
                 <br />
+                <label htmlFor="incidentDate">Incident date: </label>
+                <input type="date" onChange={handleChange}
+                    name="incidentDate" id="incidentDate" value={incidentDate} />
+                <br />
                 <label htmlFor="incidentDescription">Incident Description: </label>
-                <textarea required rows="4" cols="50" maxLength="20000" onChange={handleChange}
+                <textarea rows="4" cols="50" maxLength="20000" onChange={handleChange}
                     name="incidentDescription" id="incidentDescription" value={incidentDescription}></textarea>
                 <br />
             </section>
@@ -209,7 +217,7 @@ const ClaimForm = (props) => {
                     <hr/>
                     <h4>Staff Only</h4>
                     <label htmlFor="staffNotes">Staff Notes: </label>
-                    <textarea required rows="4" cols="50" maxLength="20000" onChange={handleChange}
+                    <textarea rows="4" cols="50" maxLength="20000" onChange={handleChange}
                         name="staffNotes" id="staffNotes" value={staffNotes} disabled={hasStaffNotes}
                         ></textarea>
                     <p>Set status:
@@ -220,6 +228,7 @@ const ClaimForm = (props) => {
                             <option value="NEW">NEW</option>
                             <option value="INPROGRESS">INPROGRESS</option>
                             <option value="REJECTED">REJECTED</option>
+                            <option value="ACCEPTED">ACCEPTED</option>
                             <option value="PAID">PAID</option>
                             <option value="TRANSFERRED">TRANSFERRED</option>
                         </select>

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { getAllClaims, getMyClaims } from '../../data/DataFunctions';
 import ClaimRow from './ClaimRow';
+import Search from './Search';
 
 
 const Claims = () => {
@@ -95,6 +96,8 @@ const Claims = () => {
             displayClaims.length === 0 &&
             <p>No claims to display.</p>
         }
+        <br/>
+        <Search />
     </Fragment>
 }
 
